@@ -3,6 +3,7 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import Vue from 'vue'
 import App from './App.vue'
+import './global.css'
 
 Vue.config.productionTip = false
 

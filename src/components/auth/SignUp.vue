@@ -1,8 +1,17 @@
 <template>
   <div class="container">
-    <form class="form-signin" @submit.prevent="signin">
+    <form class="form-signin" @submit.prevent="signup">
       <img class="mb-1" src="@/assets/logo.png" alt width="72" height="72" />
       <h1 class="h2 mb-4 font-weight-normal" style="color:#24e0ae ">Trivia</h1>
+      <input
+        type="name"
+        v-model="username"
+        id="inputName"
+        class="form-control"
+        placeholder="Username"
+        required
+        autofocus
+      />
       <label for="inputEmail" class="sr-only">Email address</label>
       <input
         type="email"
@@ -11,7 +20,6 @@
         class="form-control"
         placeholder="Email address"
         required
-        autofocus
       />
       <label for="inputPassword" class="sr-only">Password</label>
       <input
@@ -24,9 +32,8 @@
       />
 
       <button class="btn btn-lg btn-primary btn-block" type="submit">
-        Sign in
+        Sign Up
       </button>
-      <router-link to="/signup" class="btn">SignUp</router-link>
       <div
         v-if="loading"
         class="mt-2 spinner-border text-secondary"
@@ -34,18 +41,19 @@
       >
         <span class="sr-only">Loading...</span>
       </div>
-
+      <router-link to="/" class="btn">Sign In</router-link>
       <p v-if="error" class="mt-3 mb-3 text-danger">{{ error }}</p>
     </form>
   </div>
 </template>
 
 <script>
-  import { signIn } from '@/apis/auth/auth'
+  import { signUp } from '@/apis/auth/auth'
   export default {
     name: 'sigin',
     data() {
       return {
+        username: '',
         email: '',
         password: '',
         error: '',
@@ -56,25 +64,27 @@
       //this.checkSignedIn()
     },
     methods: {
-      signin() {
+      signup() {
         this.loading = true
-        signIn(this.email, this.password)
-          .then((response) => this.signinSuccessful(response))
+        signUp(this.username, this.email, this.password)
+          .then((response) => this.signupSuccessful(response))
           .catch((error) => console.log(error))
       },
-      signinSuccessful(response) {
+      signupSuccessful(response) {
         this.loading = false
         if (response.data.error) {
-          this.signinFailure(response.data.error)
+          this.signupFailure(response.data.error)
           return
         }
+        console.log(response)
+
         localStorage.token = response.data.auth_token
         localStorage.signedIn = true
         this.error = ''
         // this.$router.replace('/home')
       },
-      signinFailure(error) {
-        this.error = error.user_authentication
+      signupFailure(error) {
+        this.error = error.user_found
       },
     },
   }
@@ -115,10 +125,17 @@
   .form-signin .form-control:focus {
     z-index: 2;
   }
+  .form-signin input[type='name'] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+  }
   .form-signin input[type='email'] {
     margin-bottom: -1px;
     border-bottom-right-radius: 0;
     border-bottom-left-radius: 0;
+    border-top-right-radius: 0;
+    border-top-left-radius: 0;
   }
   .form-signin input[type='password'] {
     margin-bottom: 10px;

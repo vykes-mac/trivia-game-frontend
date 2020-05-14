@@ -8,3 +8,9 @@ export function addQuestion(question, answer, options, categories) {
     categories: categories,
   })
 }
+
+export function getQuestions(categories) {
+  return secureInstance.get('/questions/fetch', {
+    params: { categories: categories },
+  })
+}

@@ -9,6 +9,8 @@
           <div class="card-header">
             <input
               type="name"
+              v-model="question"
+              @keydown.enter.prevent=""
               class="form-control"
               id="inputName"
               placeholder="Type a question"
@@ -70,28 +72,56 @@
             <button class="float-right btn btn-primary mr-4">
               Submit
             </button>
+            <div
+              v-if="loading"
+              class="mt-2 spinner-border text-secondary float-right mr-2"
+              role="status"
+            >
+              <span class="sr-only">Loading...</span>
+            </div>
             <br />
             <br />
           </div>
         </form>
       </div>
+      <h1
+        v-if="saved"
+        class="h5 mb-4 mt-2 font-weight-normal"
+        style="color:#24e0ae "
+      >
+        Thank you!! your trivia was created, you can create more or start a
+        trivia
+      </h1>
     </div>
   </div>
 </template>
 
 <script>
+  import { addQuestion } from '@/apis/questions/questions'
   export default {
     name: 'create-question',
 
     data() {
       return {
+        question: '',
         optionsInput: '',
         options: [],
         answer: '',
         activeTags: [],
         allTags: [],
         error: false,
+        loading: false,
+        saved: false,
       }
+    },
+    mounted: function() {
+      const ele = document.getElementsByClassName('tags__search')
+      ele[0].addEventListener('keydown', function(e) {
+        if (e.keyCode == 13) {
+          e.preventDefault()
+          return
+        }
+      })
     },
     watch: {
       optionsInput: function() {
@@ -127,7 +157,22 @@
         if (this.invalidForm()) {
           return
         }
-        console.log('valid')
+        const categories = this.activeTags.map((tag) => tag.name)
+        addQuestion(this.question, this.answer, this.options, categories)
+          .then((response) => this.successful(response))
+          .catch((error) => this.failure(error))
+      },
+      successful(response) {
+        this.loading = false
+        if (response.data.error) {
+          this.failure(response.data.error)
+          return
+        }
+        this.saved = true
+      },
+      failure(error) {
+        console.log(error)
+        // this.error = error.user_found
       },
       invalidForm() {
         if (this.options.length == 0) {
@@ -136,6 +181,7 @@
         if (this.activeTags.length == 0) {
           this.error = true
         }
+
         var forms = document.getElementsByClassName('needs-validation')
         if (forms[0].checkValidity() === false) {
           forms[0].classList.add('was-validated')

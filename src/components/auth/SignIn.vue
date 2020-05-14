@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="singin-container">
     <form class="form-signin" @submit.prevent="signin">
       <img class="mb-1" src="@/assets/logo.png" alt width="72" height="72" />
       <h1 class="h2 mb-4 font-weight-normal" style="color:#24e0ae ">Trivia</h1>
@@ -43,7 +43,7 @@
 <script>
   import { signIn } from '@/apis/auth/auth'
   export default {
-    name: 'sigin',
+    name: 'signin',
     data() {
       return {
         email: '',
@@ -81,7 +81,7 @@
 </script>
 
 <style>
-  .container {
+  .singin-container {
     height: 100%;
     *display: -ms-flexbox;
     display: -webkit-box;

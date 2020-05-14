@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="signup-container">
     <form class="form-signin" @submit.prevent="signup">
       <img class="mb-1" src="@/assets/logo.png" alt width="72" height="72" />
       <h1 class="h2 mb-4 font-weight-normal" style="color:#24e0ae ">Trivia</h1>
@@ -91,7 +91,7 @@
 </script>
 
 <style>
-  .container {
+  .signup-container {
     height: 100%;
     *display: -ms-flexbox;
     display: -webkit-box;

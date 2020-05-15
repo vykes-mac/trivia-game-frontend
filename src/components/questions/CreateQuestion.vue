@@ -1,5 +1,5 @@
 <template>
-  <div class="container myrow h-100 justify-content-center align-items-center">
+  <div class="container myrow h-50 justify-content-center align-items-center">
     <div class="col-md-8 my-auto">
       <h1 class="h2 mb-2 font-weight-normal" style="color:#24e0ae ">
         Create new Trivia
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-  import { addQuestion } from '@/apis/questions/questions'
+  import { addQuestion, getCategories } from '@/apis/questions/questions'
   export default {
     name: 'create-question',
 
@@ -122,6 +122,21 @@
           return
         }
       })
+      getCategories()
+        .then((response) => {
+          if (response.data.categories) {
+            response.data.categories.forEach((v, index) => {
+              const tag = {
+                id: index + 1,
+                name: v,
+                slug: v,
+                color: this.getRandomColor(),
+              }
+              this.allTags.push(tag)
+            })
+          }
+        })
+        .catch((error) => console.log(error))
     },
     watch: {
       optionsInput: function() {
@@ -141,7 +156,7 @@
         this.options = val
       },
       onTagCreated(tag) {
-        tag.id = this.activeTags.length + 1
+        tag.id = this.allTags.length + 1
         this.activeTags.push(tag)
         this.allTags.push(tag)
         this.error = false
@@ -187,6 +202,14 @@
           forms[0].classList.add('was-validated')
         }
         return this.error || forms[0].checkValidity() === false
+      },
+      getRandomColor() {
+        var letters = '0123456789ABCDEF'
+        var color = '#'
+        for (var i = 0; i < 6; i++) {
+          color += letters[Math.floor(Math.random() * 16)]
+        }
+        return color
       },
     },
   }

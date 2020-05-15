@@ -1,5 +1,5 @@
 <template>
-  <div class="container myrow h-100 justify-content-center align-items-center">
+  <div class="container myrow h-50 justify-content-center align-items-center">
     <div class="col-md-8 my-auto">
       <div class="dropdown mb-4">
         <button
@@ -287,7 +287,7 @@
           .catch((error) => console.log(error))
       },
       endGame() {
-        if (this.score > 0) {
+        if (this.score > 0 && !this.end) {
           if (confirm('Your current points will be persisted')) {
             this.addScore()
             this.$router.push({ path: '/home' })

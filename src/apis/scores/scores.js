@@ -12,3 +12,7 @@ export function addScore(score, correctStreak, incorrectStreak, category) {
 export function getScores() {
   return secureInstance.get('/scores/highscores')
 }
+
+export function getUserScore() {
+  return secureInstance.get('/scores/user')
+}

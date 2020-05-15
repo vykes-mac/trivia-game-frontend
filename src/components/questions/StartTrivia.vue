@@ -65,7 +65,7 @@
               please choose an answer.
             </div>
           </div>
-          <button class="float-right btn btn-info mr-3">
+          <button class="float-right btn btn-info mr-3" @click="endGame">
             End
           </button>
 
@@ -195,8 +195,6 @@
       },
       setProgress() {
         this.progress = Math.ceil(((this.index + 1) / this.trivia.length) * 100)
-        console.log(this.progress)
-        console.log(this.trivia.length)
       },
       failure(error) {
         console.log(error)
@@ -223,7 +221,7 @@
           this.setCorrectStreak()
           this.message = 'You are correct!! 😀'
         } else {
-          this.showCorrectAnswer()
+          this.setIncorrectStreak()
           this.message = 'Sorry! better luck next time 😞'
           this.showCorrectAnswer()
         }
@@ -287,6 +285,18 @@
         )
           .then((response) => console.log(response.data))
           .catch((error) => console.log(error))
+      },
+      endGame() {
+        if (this.score > 0) {
+          if (confirm('Your current points will be persisted')) {
+            this.addScore()
+            this.$router.push({ path: '/home' })
+          } else {
+            return
+          }
+        } else {
+          this.$router.push({ path: '/home' })
+        }
       },
     },
   }

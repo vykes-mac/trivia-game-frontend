@@ -11,7 +11,7 @@ export default new Router({
   mode: 'history',
   routes: [
     {
-      path: '/a',
+      path: '/',
       name: 'signin',
       component: Signin,
     },
@@ -26,8 +26,7 @@ export default new Router({
       component: CreateQuestion,
     },
     {
-      //path: '/start-trivia',
-      path: '/',
+      path: '/start-trivia',
       name: 'start',
       component: StartTrivia,
     },

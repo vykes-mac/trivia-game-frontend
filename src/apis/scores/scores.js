@@ -1,6 +1,6 @@
 import { secureInstance } from '../axios_instance'
 
-export function addScore(score, correct_streak, incorrect_streak, category) {
+export function addScore(score, correctStreak, incorrectStreak, category) {
   return secureInstance.post('/scores/add', {
     score: score,
     correct_streak: correctStreak,

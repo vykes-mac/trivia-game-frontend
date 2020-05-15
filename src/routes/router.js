@@ -8,11 +8,11 @@ import CreateQuestion from '../components/questions/CreateQuestion.vue'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
-      path: '/a',
+      path: '/',
       name: 'signin',
       component: Signin,
     },
@@ -22,20 +22,43 @@ export default new Router({
       component: Signup,
     },
     {
-      path: '/create-question',
+      path: '/create-trivia',
       name: 'create',
       component: CreateQuestion,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/start-trivia',
       name: 'start',
       component: StartTrivia,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
-      // path: '/highscores',
-      path: '/',
+      path: '/highscores',
       name: 'highscores',
       component: Highscores,
+      meta: {
+        requiresAuth: true,
+      },
     },
   ],
 })
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some((route) => route.meta.requiresAuth)) {
+    if (localStorage.getItem('token') == null) {
+      next({
+        path: '/',
+        params: { nextUrl: to.fullPath },
+      })
+    }
+  } else {
+    next()
+  }
+})
+
+export default router

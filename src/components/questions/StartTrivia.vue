@@ -117,6 +117,7 @@
     answerQuestion,
     getCategories,
   } from '@/apis/questions/questions'
+  import { addScore } from '@/apis/scores/scores'
   export default {
     name: 'start-trivia',
     data() {
@@ -229,6 +230,7 @@
 
         if (this.index >= this.trivia.length - 1) {
           this.end = true
+          this.addScore()
         }
         setTimeout(() => this.nextQuestion(), 2000)
         clearTimeout()
@@ -275,6 +277,16 @@
         if (this.incorrectStreak >= this.oiStreak) {
           this.oiStreak = this.incorrectStreak
         }
+      },
+      addScore() {
+        addScore(
+          this.score,
+          this.ocStreak,
+          this.oiStreak,
+          this.selectedCategory
+        )
+          .then((response) => console.log(response.data))
+          .catch((error) => console.log(error))
       },
     },
   }

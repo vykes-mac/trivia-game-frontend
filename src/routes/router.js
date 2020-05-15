@@ -1,5 +1,6 @@
 import Signin from '@/components/auth/SignIn.vue'
 import Signup from '@/components/auth/SignUp.vue'
+import Home from '@/components/home/Home.vue'
 import StartTrivia from '@/components/questions/StartTrivia.vue'
 import Highscores from '@/components/scores/Highscores.vue'
 import Vue from 'vue'
@@ -15,6 +16,11 @@ let router = new Router({
       path: '/',
       name: 'signin',
       component: Signin,
+    },
+    {
+      path: '/home',
+      name: 'home',
+      component: Home,
     },
     {
       path: '/signup',

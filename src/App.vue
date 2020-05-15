@@ -17,8 +17,8 @@
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav ml-auto">
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <div class="nav navbar-nav ml-auto">
           <router-link to="/create-trivia" class="nav-item nav-link"
             >Create Trivia</router-link
           >

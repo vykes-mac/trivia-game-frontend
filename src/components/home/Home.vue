@@ -1,6 +1,6 @@
 <template>
-  <div class="container myrow h-100 justify-content-center align-items-center">
-    <div class="col-md-4 my-auto">
+  <div class="container myrow h-50 justify-content-center align-items-center">
+    <div class="col-md-4 ">
       <h1 class="mb-5" style="color:#24e0ae ">Welcome to Trivia</h1>
       <router-link
         to="/create-trivia"

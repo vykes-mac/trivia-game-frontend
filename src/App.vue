@@ -1,10 +1,14 @@
 <template>
   <div id="app">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand font-weight-normal" style="color:#24e0ae" href="#">
+      <router-link
+        to="/home"
+        class="navbar-brand font-weight-normal"
+        style="color:#24e0ae"
+      >
         <img src="@/assets/logo.png" width="30" height="30" alt="" />
         Trivia
-      </a>
+      </router-link>
       <button
         class="navbar-toggler"
         type="button"
@@ -40,7 +44,7 @@
     name: 'App',
     methods: {
       signOut() {
-        localStorage.clear
+        localStorage.clear()
       },
     },
   }

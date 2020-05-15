@@ -21,6 +21,9 @@ let router = new Router({
       path: '/home',
       name: 'home',
       component: Home,
+      meta: {
+        requiresAuth: true,
+      },
     },
     {
       path: '/signup',
@@ -61,6 +64,8 @@ router.beforeEach((to, from, next) => {
         path: '/',
         params: { nextUrl: to.fullPath },
       })
+    } else {
+      next()
     }
   } else {
     next()

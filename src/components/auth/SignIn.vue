@@ -52,9 +52,7 @@
         loading: false,
       }
     },
-    updated() {
-      //this.checkSignedIn()
-    },
+
     methods: {
       signin() {
         this.loading = true
@@ -69,7 +67,8 @@
           return
         }
         localStorage.token = response.data.auth_token
-        localStorage.signedIn = true
+        console.log(localStorage.getItem('token'))
+        //localStorage.signedIn = true
         this.error = ''
         this.$router.push({ path: '/home' })
       },

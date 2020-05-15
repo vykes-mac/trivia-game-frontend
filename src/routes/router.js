@@ -1,5 +1,6 @@
 import Signin from '@/components/auth/SignIn.vue'
 import Signup from '@/components/auth/SignUp.vue'
+import StartTrivia from '@/components/questions/StartTrivia.vue'
 import Vue from 'vue'
 import Router from 'vue-router'
 import CreateQuestion from '../components/questions/CreateQuestion.vue'
@@ -20,10 +21,15 @@ export default new Router({
       component: Signup,
     },
     {
-      //path: '/create-question',
-      path: '/',
+      path: '/create-question',
       name: 'create',
       component: CreateQuestion,
+    },
+    {
+      //path: '/start-trivia',
+      path: '/',
+      name: 'start',
+      component: StartTrivia,
     },
   ],
 })

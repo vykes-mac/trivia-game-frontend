@@ -67,7 +67,7 @@
           return
         }
         localStorage.token = response.data.auth_token
-        console.log(localStorage.getItem('token'))
+        //console.log(localStorage.getItem('token'))
         //localStorage.signedIn = true
         this.error = ''
         this.$router.push({ path: '/home' })

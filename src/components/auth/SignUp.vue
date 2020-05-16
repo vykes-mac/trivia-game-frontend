@@ -79,9 +79,8 @@
         console.log(response)
 
         localStorage.token = response.data.auth_token
-        localStorage.signedIn = true
         this.error = ''
-        // this.$router.replace('/home')
+        this.$router.push({ path: '/home' })
       },
       signupFailure(error) {
         this.error = error.user_found

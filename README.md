@@ -1,6 +1,8 @@
 # trivia-front-end
 
-this is VueJs front end for trivia project. the backend can be found here
+this is VueJs front end for trivia project. the backend can be found here https://github.com/vykes-mac/trivia-game
+
+heroku link https://blooming-plateau-49974.herokuapp.com/
 
 ## Project setup
 ```

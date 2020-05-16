@@ -1,5 +1,5 @@
 import axios from 'axios'
-const API_URL = 'https://fast-depths-01924.herokuapp.com/api/v1'
+const API_URL = `process.env.API_ENDPOINT`
 
 export const instance = axios.create({
   baseURL: API_URL,

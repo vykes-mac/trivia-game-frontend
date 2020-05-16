@@ -8,5 +8,5 @@ export const instance = axios.create({
 
 export const secureInstance = axios.create({
   baseURL: API_URL,
-  headers: { Authorization: localStorage.token },
+  headers: { Authorization: localStorage.getItem('token') },
 })

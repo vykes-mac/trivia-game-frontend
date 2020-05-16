@@ -1,5 +1,7 @@
 # trivia-front-end
 
+this is VueJs front end for trivia project. the backend can be found here
+
 ## Project setup
 ```
 npm install

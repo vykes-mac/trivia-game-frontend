@@ -183,6 +183,9 @@
           this.failure(response.data.error)
           return
         }
+        var forms = document.getElementsByClassName('needs-validation')
+        forms[0].rest()
+        setTimeout(() => (this.saved = false), 2000)
         this.saved = true
       },
       failure(error) {

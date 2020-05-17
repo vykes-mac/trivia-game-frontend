@@ -7,7 +7,7 @@ import App from './App.vue'
 import './global.css'
 import router from './routes/router'
 
-Vue.config.productionTip = false
+Vue.config.productionTip = true
 Vue.config.devtools = true
 
 Vue.use(BootstrapVue)

@@ -5,14 +5,19 @@
         Create new Trivia
       </h1>
       <div class="card">
-        <form class="needs-validation" novalidate @submit.prevent="addTrivia">
+        <form
+          id="myForm"
+          class="needs-validation"
+          novalidate
+          @submit.prevent="addTrivia"
+        >
           <div class="card-header">
             <input
               type="name"
               v-model="question"
               @keydown.enter.prevent=""
               class="form-control"
-              id="inputName"
+              id="question"
               placeholder="Type a question"
               required
             />
@@ -24,6 +29,7 @@
                 <div class="col-md-6">
                   <textarea
                     v-model="optionsInput"
+                    id="options"
                     class="form-control"
                     rows="3"
                     placeholder="Enter options - press enter to separate"
@@ -146,6 +152,7 @@
           this.options = []
           return
         }
+
         val.pop()
         this.options = val
       },
@@ -183,9 +190,13 @@
           this.failure(response.data.error)
           return
         }
-        var forms = document.getElementsByClassName('needs-validation')
-        forms[0].rest()
-        setTimeout(() => (this.saved = false), 2000)
+
+        setTimeout(() => {
+          this.options = []
+          this.saved = false
+          this.question = ''
+          this.optionsInput = ''
+        }, 3000)
         this.saved = true
       },
       failure(error) {
